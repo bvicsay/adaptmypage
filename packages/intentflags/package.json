@@ -1,0 +1,86 @@
+{
+  "name": "intentflags",
+  "version": "0.1.0",
+  "description": "Semantic feature flags for websites. Infers what a visitor is trying to do (powered by Jev) and exposes it to your React code as a normal feature flag.",
+  "keywords": [
+    "feature-flags",
+    "intent",
+    "personalization",
+    "react",
+    "nextjs",
+    "jev",
+    "typesafe",
+    "behavioral",
+    "analytics",
+    "adaptive-ui"
+  ],
+  "license": "MIT",
+  "author": "Barnabas Vicsay",
+  "homepage": "https://intentflags.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvicsay/adaptmypage.git",
+    "directory": "packages/intentflags"
+  },
+  "bugs": "https://github.com/bvicsay/adaptmypage/issues",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    },
+    "./core": {
+      "import": { "types": "./dist/core.d.ts", "default": "./dist/core.js" },
+      "require": { "types": "./dist/core.d.cts", "default": "./dist/core.cjs" }
+    },
+    "./server": {
+      "import": { "types": "./dist/server.d.ts", "default": "./dist/server.js" },
+      "require": { "types": "./dist/server.d.cts", "default": "./dist/server.cjs" }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": false
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run typecheck && pnpm run test && pnpm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "jsdom": "^27.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

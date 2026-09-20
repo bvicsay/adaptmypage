@@ -1,0 +1,18 @@
+{
+  "name": "intentflags-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "IntentFlags — semantic feature flags for websites, powered by Jev",
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter intentflags build && pnpm --filter web dev",
+    "build": "pnpm -r --filter intentflags build && pnpm --filter web build",
+    "build:sdk": "pnpm --filter intentflags build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "release:sdk": "pnpm --filter intentflags publish --access public"
+  }
+}
