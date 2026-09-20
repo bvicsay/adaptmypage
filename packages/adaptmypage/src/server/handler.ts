@@ -24,7 +24,7 @@ export interface IntentHandlerOptions extends EvaluateOptions {
  * else that speaks `fetch`.
  *
  *   // app/api/intent/route.ts
- *   import { createIntentHandler } from "intentflags/server";
+ *   import { createIntentHandler } from "adaptmypage/server";
  *   export const POST = createIntentHandler({ siteContext: "..." });
  */
 export function createIntentHandler(options: IntentHandlerOptions = {}) {

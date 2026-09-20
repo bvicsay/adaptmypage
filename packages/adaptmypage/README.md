@@ -1,11 +1,11 @@
-# intentflags
+# adaptmypage
 
 **Semantic feature flags for websites, powered by [Jev](https://vercel.com/i/what-is-jev).**
 
-IntentFlags watches what a visitor is doing right now — sections read, code copied, prices hovered, forms touched — asks Jev (TypeSafe AI's decision model) what the visitor is trying to do, and exposes the answer to your React code as an ordinary feature flag.
+adaptmypage watches what a visitor is doing right now — sections read, code copied, prices hovered, forms touched — asks Jev (TypeSafe AI's decision model) what the visitor is trying to do, and exposes the answer to your React code as an ordinary feature flag.
 
 ```tsx
-import { useIntent } from "intentflags";
+import { useIntent } from "adaptmypage";
 
 function Hero() {
   const technical = useIntent("technical_evaluation");
@@ -22,12 +22,12 @@ Your code stays deterministic. The fuzzy judgment is the model's.
 - Server handler is a Web-standard `(Request) => Promise<Response>` — Next.js, Hono, Remix, SvelteKit, Workers
 - Works without a key (labelled heuristic) so dev and CI never depend on the network
 
-Live demo: the landing page at **intentflags.dev** runs this SDK on itself and shows you your own inferred state.
+Live demo: the landing page at **adaptmypage.com** runs this SDK on itself and shows you your own inferred state.
 
 ## Install
 
 ```bash
-npm install intentflags
+npm install adaptmypage
 ```
 
 ## Quickstart (Next.js App Router)
@@ -36,7 +36,7 @@ npm install intentflags
 
 ```tsx
 // app/layout.tsx
-import { IntentFlagsProvider } from "intentflags";
+import { IntentFlagsProvider } from "adaptmypage";
 
 export default function RootLayout({ children }) {
   return (
@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
 
 ```ts
 // app/api/intent/route.ts
-import { createIntentHandler } from "intentflags/server";
+import { createIntentHandler } from "adaptmypage/server";
 
 export const POST = createIntentHandler({
   siteContext: "Acme OCR API — developer landing page. Sections: hero, docs, integrations, pricing, faq.",
@@ -70,7 +70,7 @@ OPENROUTER_API_KEY=sk-or-v1-… # via OpenRouter, model jev-latest
 **3. Use a flag**
 
 ```tsx
-import { Intent, useIntent, useVisitorState } from "intentflags";
+import { Intent, useIntent, useVisitorState } from "adaptmypage";
 
 <Intent when="price_comparison" confidence={0.75}>
   <PricingComparison />
@@ -123,16 +123,16 @@ if (visitor.intent.value === "technical_evaluation" && visitor.expertise > 0.8) 
 - `useIntentDebug()` → `{ state, actions, lastResponse, evaluating, evaluate(), track() }`
 - `useIntentFlags()` → the underlying client (`track`, `setContext`, `evaluate`, `getSnapshot`)
 
-### `intentflags/core` (no React)
+### `adaptmypage/core` (no React)
 
 ```ts
-import { createIntentFlags } from "intentflags/core";
+import { createIntentFlags } from "adaptmypage/core";
 const flags = createIntentFlags({ endpoint: "/api/intent" });
 flags.subscribe((state) => (document.body.dataset.intent = state.intent.value));
 flags.track("opened_pricing_calculator");
 ```
 
-### `intentflags/server`
+### `adaptmypage/server`
 
 `createIntentHandler(options)` returns a `(Request) => Promise<Response>`.
 
@@ -180,7 +180,7 @@ useIntent("urgency").confidence;          // score, normalized 0..1
 
 ## What is sent
 
-A compact snapshot (~2–4 KB): page path and title, referrer host, UTM tags, device class, session seconds, per-section view/hover time, scroll depth, and a timeline of semantic events (`click button:Compare plans`, `copy code:npm install intentflags`, `scroll_return docs`, `exit_intent`, …). The server turns it into a readable state object and sends it to Jev with typed questions. A decision on a busy page is about 1,700 input tokens ≈ $0.00007 at Jev's list price; output is free.
+A compact snapshot (~2–4 KB): page path and title, referrer host, UTM tags, device class, session seconds, per-section view/hover time, scroll depth, and a timeline of semantic events (`click button:Compare plans`, `copy code:npm install adaptmypage`, `scroll_return docs`, `exit_intent`, …). The server turns it into a readable state object and sends it to Jev with typed questions. A decision on a busy page is about 1,700 input tokens ≈ $0.00007 at Jev's list price; output is free.
 
 ## License
 

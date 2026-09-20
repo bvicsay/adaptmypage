@@ -1,7 +1,7 @@
 "use client";
 
-import { INTENTS, NEXT_ACTIONS, useIntentDebug } from "intentflags";
-import type { Action, IntentId, NextActionId } from "intentflags";
+import { INTENTS, NEXT_ACTIONS, useIntentDebug } from "adaptmypage";
+import type { Action, IntentId, NextActionId } from "adaptmypage";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAdaptive } from "../adaptive/adaptive-context";
 import { Meter, Pct, heat } from "../ui";
@@ -66,7 +66,7 @@ export function IntentPanel() {
       <header className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="live-dot" aria-hidden />
+            <span className="dot is-live" aria-hidden />
             <span className="eyebrow !text-ink">Live visitor state</span>
           </div>
           <p className="mt-1 font-mono text-[11px] text-ink-3">
@@ -101,7 +101,7 @@ export function IntentPanel() {
             type="button"
             onClick={() => setTab(id)}
             data-intent={`Panel tab: ${label}`}
-            className={`-mb-px border-b-2 px-3 py-2 font-mono text-[11.5px] ${tab === id ? "border-signal text-ink" : "border-transparent text-ink-3 hover:text-ink"}`}
+            className={`-mb-px border-b-2 px-3 py-2 font-mono text-[11.5px] ${tab === id ? "border-ink text-ink" : "border-transparent text-ink-3 hover:text-ink"}`}
           >
             {label}
           </button>
@@ -123,7 +123,7 @@ export function IntentPanel() {
                     <li key={id}>
                       <div className="flex items-baseline justify-between text-[12.5px]">
                         <span className={`font-mono ${win ? "text-ink font-medium" : "text-ink-2"}`}>{id}</span>
-                        <Pct value={p} className={win ? "text-signal" : "text-ink-3"} />
+                        <Pct value={p} className={win ? "text-ink" : "text-ink-3"} />
                       </div>
                       <Meter value={p} className="mt-1" />
                       {win ? <p className="mt-1 text-[11.5px] leading-snug text-ink-3">{INTENTS[id].description}</p> : null}
@@ -171,13 +171,13 @@ export function IntentPanel() {
             <section>
               <h3 className="eyebrow">Page adaptations</h3>
               {log.length === 0 ? (
-                <p className="mt-2 text-[12px] text-ink-3">Nothing yet. Read the docs, hover the prices, copy some code — the page reacts to the judgment, not to the click.</p>
+                <p className="mt-2 text-[12px] text-ink-3">Nothing yet. Read the code, hover the prices, copy the install command. The page reacts to the judgment, not to the click.</p>
               ) : (
                 <ol className="mt-2 space-y-2">
                   {log.map((e) => (
-                    <li key={e.id} className="rounded-[8px] border-l-2 border-adapt bg-adapt-soft/60 px-3 py-2">
+                    <li key={e.id} className="rounded-[6px] border-l-2 border-lime bg-card/60 px-3 py-2">
                       <div className="text-[12.5px] text-ink">{e.text}</div>
-                      <div className="mt-0.5 font-mono text-[10.5px] text-ink-3">because {e.reason}</div>
+                      <div className="mt-0.5 font-mono text-[10.5px] text-ink-3">{e.why}</div>
                     </li>
                   ))}
                 </ol>
@@ -195,7 +195,7 @@ export function IntentPanel() {
               .map((a, i) => (
                 <li key={`${a.t}-${i}`} className="flex gap-2 rounded px-2 py-1 font-mono text-[11.5px] hover:bg-paper-2">
                   <span className="w-11 shrink-0 text-right tabular-nums text-ink-3">{a.t.toFixed(1)}s</span>
-                  <span className="w-4 shrink-0 text-center text-signal" aria-hidden>
+                  <span className="w-4 shrink-0 text-center text-ink" aria-hidden>
                     {ICON[a.type] ?? "·"}
                   </span>
                   <span className="min-w-0 flex-1 truncate">
@@ -240,7 +240,7 @@ export function IntentPanel() {
           onClick={() => void evaluate()}
           disabled={evaluating}
           data-intent="Judge now"
-          className="rounded-md bg-ink px-3 py-1.5 font-mono text-[11.5px] text-white hover:bg-ink-2 disabled:opacity-50"
+          className="rounded-[6px] bg-ink px-3 py-1.5 font-mono text-[11.5px] text-paper hover:bg-black disabled:opacity-50"
         >
           {evaluating ? "Judging…" : "Judge now"}
         </button>
@@ -250,7 +250,7 @@ export function IntentPanel() {
           onClick={() => {
             try {
               sessionStorage.clear();
-              localStorage.removeItem("if:vid");
+              localStorage.removeItem("if:vid"); sessionStorage.removeItem("amp:popups");
               localStorage.removeItem("if:visits");
             } catch {}
             location.reload();

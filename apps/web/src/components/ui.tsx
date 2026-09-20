@@ -5,8 +5,8 @@ import type { ReactNode } from "react";
 /** Interpolate the confidence heat: uncertain grey-blue → signal blue. */
 export function heat(v: number): string {
   const t = Math.max(0, Math.min(1, v));
-  const a = [0xc9, 0xd2, 0xe6];
-  const b = [0x1b, 0x4d, 0xff];
+  const a = [0xc6, 0xc7, 0xbf];
+  const b = [0x1b, 0x1f, 0x1a];
   const c = a.map((x, i) => Math.round(x + (b[i]! - x) * t));
   return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
 }
@@ -24,7 +24,12 @@ export function Pct({ value, className = "" }: { value: number; className?: stri
 }
 
 export function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <p className={`eyebrow ${className}`}>{children}</p>;
+  return (
+    <p className={`eyebrow flex items-center gap-2 ${className}`}>
+      <span className="dot" aria-hidden />
+      {children}
+    </p>
+  );
 }
 
 export function SectionHeader({
@@ -41,10 +46,10 @@ export function SectionHeader({
   return (
     <header className="max-w-2xl">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 id={id} className="display display-tight mt-3 text-[2rem] sm:text-[2.6rem] text-ink">
+      <h2 id={id} className="display mt-5 text-[2.4rem] sm:text-[3.4rem] text-ink">
         {title}
       </h2>
-      {lede ? <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-2">{lede}</p> : null}
+      {lede ? <p className="mt-5 max-w-lg text-[1.05rem] leading-relaxed text-ink-2">{lede}</p> : null}
     </header>
   );
 }
@@ -69,10 +74,10 @@ export function Button({
   dataIntent?: string;
 }) {
   const base =
-    "inline-flex h-11 items-center justify-center gap-2 rounded-[8px] px-4 text-[0.95rem] font-medium transition-colors focus-visible:outline-2";
+    "inline-flex h-11 items-center justify-center gap-2 rounded-[6px] px-4 text-[0.95rem] font-semibold transition-colors focus-visible:outline-2";
   const styles = {
-    primary: "bg-signal text-white hover:bg-signal-ink",
-    secondary: "bg-surface text-ink border border-line-2 hover:border-ink-3",
+    primary: "bg-ink text-paper hover:bg-black",
+    secondary: "bg-transparent text-ink border border-ink/30 hover:border-ink",
     ghost: "text-ink-2 hover:text-ink hover:bg-paper-2",
   }[variant];
   const cls = `${base} ${styles} ${disabled ? "opacity-60 pointer-events-none" : ""} ${className}`;
@@ -99,7 +104,7 @@ export function CopyButton({ text, label = "Copy" }: { text: string; label?: str
     <button
       type="button"
       data-intent={`Copy: ${text.slice(0, 40)}`}
-      className="rounded-md border border-white/15 px-2 py-1 font-mono text-[11px] text-white/70 hover:bg-white/10 hover:text-white"
+      className="rounded border border-lime/30 px-2 py-1 font-mono text-[11px] text-lime/80 hover:bg-lime/10 hover:text-lime"
       onClick={async (e) => {
         const btn = e.currentTarget;
         try {

@@ -1,10 +1,10 @@
 <p align="center">
   <img src="apps/web/public/icon.svg" width="56" alt="" />
 </p>
-<h1 align="center">IntentFlags</h1>
+<h1 align="center">adaptmypage</h1>
 <p align="center">
   <a href="https://github.com/bvicsay/adaptmypage/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bvicsay/adaptmypage/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://www.npmjs.com/package/intentflags"><img alt="npm" src="https://img.shields.io/npm/v/intentflags?color=1b4dff"></a>
+  <a href="https://www.npmjs.com/package/adaptmypage"><img alt="npm" src="https://img.shields.io/npm/v/adaptmypage?color=1b4dff"></a>
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-0c1222"></a>
 </p>
 <p align="center"><strong>Semantic feature flags for websites, powered by Jev.</strong><br/>
@@ -19,7 +19,7 @@ This repository holds the open-source SDK and the landing page that runs it on i
 
 | path | what |
 | --- | --- |
-| [`packages/intentflags`](packages/intentflags) | The npm package: React hooks, `<Intent>`, vanilla core, server handler, Jev client, heuristic fallback, tests |
+| [`packages/adaptmypage`](packages/adaptmypage) | The npm package: React hooks, `<Intent>`, vanilla core, server handler, Jev client, heuristic fallback, tests |
 | [`apps/web`](apps/web) | The landing page (Next.js 16). Docs, pricing, email list, and a live side panel showing the visitor their own inferred state |
 
 ## How it works
@@ -34,7 +34,7 @@ Measured on this site through OpenRouter: six answers in ~300–500 ms for ~1,70
 
 ```bash
 pnpm install
-pnpm build:sdk          # builds packages/intentflags → dist
+pnpm build:sdk          # builds packages/adaptmypage → dist
 pnpm dev                # builds the SDK, then runs the site at http://localhost:3000
 pnpm test               # SDK unit tests (vitest + jsdom)
 pnpm typecheck
@@ -54,26 +54,26 @@ Without a key the API route answers with a transparent rules-based evaluator and
 
 For the email list set `RESEND_API_KEY` + `RESEND_AUDIENCE_ID`, or `SUBSCRIBE_WEBHOOK_URL`. In development with neither set, sign-ups append to `apps/web/.data/subscribers.jsonl`.
 
-While editing the SDK and the site together, run `pnpm --filter intentflags dev` in a second terminal so `dist/` rebuilds on save.
+While editing the SDK and the site together, run `pnpm --filter adaptmypage dev` in a second terminal so `dist/` rebuilds on save.
 
 ## Deploy the site
 
 The site is a standard Next.js app. On Vercel:
 
 1. Import the repository, set **Root Directory** to `apps/web`.
-2. Build command `pnpm --filter intentflags build && pnpm --filter web build` (or leave the default and set the root `build` script) and install command `pnpm install`.
+2. Build command `pnpm --filter adaptmypage build && pnpm --filter web build` (or leave the default and set the root `build` script) and install command `pnpm install`.
 3. Add the environment variables above plus `NEXT_PUBLIC_SITE_URL=https://your-domain`.
 
 ## Publish the SDK
 
 ```bash
-cd packages/intentflags
+cd packages/adaptmypage
 npm login
 pnpm publish --access public     # runs typecheck + tests + build first
 ```
 
-Bump `version` in `packages/intentflags/package.json` before each release.
+Bump `version` in `packages/adaptmypage/package.json` before each release.
 
 ## License
 
-MIT © Barnabas Vicsay. Jev is a model by TypeSafe AI; IntentFlags is not affiliated with TypeSafe or Vercel.
+MIT © Barnabas Vicsay. Jev is a model by TypeSafe AI; adaptmypage is not affiliated with TypeSafe or Vercel.

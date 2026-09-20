@@ -9,6 +9,6 @@ labels: bug
 **What you expected**
 
 **Minimal reproduction**
-Framework and version, `intentflags` version, provider (`typesafe` / `vercel-gateway` / `openrouter` / `heuristic`).
+Framework and version, `adaptmypage` version, provider (`typesafe` / `vercel-gateway` / `openrouter` / `heuristic`).
 
 **Snapshot or response** (paste from the panel's "Model exchange" tab if relevant; remove anything private)

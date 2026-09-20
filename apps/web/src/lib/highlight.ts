@@ -4,7 +4,7 @@ let highlighterPromise: Promise<Highlighter> | null = null;
 
 /** IntentFlags code theme: navy paper, signal blue keywords, amber strings. */
 const theme = {
-  name: "intentflags",
+  name: "adaptmypage",
   type: "dark" as const,
   colors: {
     "editor.background": "#0c1222",
@@ -34,7 +34,7 @@ export async function highlight(code: string, lang: Lang): Promise<string> {
   highlighterPromise ??= createHighlighter({ themes: [theme], langs: ["tsx", "typescript", "bash", "json"] });
   const h = await highlighterPromise;
   const l = lang === "ts" ? "typescript" : lang === "text" ? "text" : lang;
-  return h.codeToHtml(code.trim(), { lang: l, theme: "intentflags" });
+  return h.codeToHtml(code.trim(), { lang: l, theme: "adaptmypage" });
 }
 
 export async function highlightAll<T extends Record<string, { code: string; lang: Lang }>>(

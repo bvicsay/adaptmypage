@@ -172,7 +172,7 @@ class BrowserClient implements IntentFlagsClient {
           body: JSON.stringify(body),
           keepalive: true,
         });
-        if (!res.ok) throw new Error(`intentflags: ${res.status} ${res.statusText}`);
+        if (!res.ok) throw new Error(`adaptmypage: ${res.status} ${res.statusText}`);
         const json = (await res.json()) as IntentResponse;
         if (seq < this.seq - 1 || this.destroyed) return this.state; // stale
         const state: VisitorState = {

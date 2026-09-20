@@ -1,4 +1,4 @@
-import { createIntentHandler } from "intentflags/server";
+import { createIntentHandler } from "adaptmypage/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,10 +9,10 @@ export const dynamic = "force-dynamic";
  */
 const handler = createIntentHandler({
   siteContext:
-    "intentflags.dev — the landing page for IntentFlags, an open-source React SDK that turns a visitor's live intent into feature flags using the Jev decision model. " +
-    "Audience: React/Next.js developers and small SaaS teams. Sections: hero (headline, install command, primary call to action), how (observe → judge → act), " +
-    "flags (table of built-in intent identifiers), docs (API reference with code samples and tabs), pricing (open-source SDK, self-hosting cost, hosted API early access), " +
-    "faq, subscribe (email list form). A side panel shows the visitor their own inferred state.",
+    "adaptmypage.com — landing page for adaptmypage, an open-source React SDK that turns a visitor's live intent into feature flags using the Jev decision model. " +
+    "Audience: React/Next.js developers and small SaaS teams. Sections: hero (headline that rewrites itself, install command), how (observe → ask Jev → change the page), " +
+    "flags (the six built-in judgments with the visitor's live values), docs (route + hook code samples, link to full reference on GitHub), pricing (open source, self-host cost, hosted early access), " +
+    "subscribe (email list). Pop-up cards explain each change and why it happened. A side panel shows the visitor their own inferred state.",
   allowDebug: true,
   timeoutMs: 6000,
   retries: 1,

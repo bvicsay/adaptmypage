@@ -1,82 +1,57 @@
 "use client";
 
-import { INTENTS, NEXT_ACTIONS, useVisitorState } from "intentflags";
-import type { IntentId, NextActionId } from "intentflags";
+import { INTENTS, useVisitorState } from "adaptmypage";
+import type { IntentId } from "adaptmypage";
 import { Meter, Pct, SectionHeader } from "../ui";
 
-const SCALARS = [
-  ["expertise", "Technical expertise", "0 = non-technical, 1 = senior engineer. Simplify or deepen examples, choose which docs tab opens first."],
-  ["friction", "Friction", "0 = smooth, 1 = stuck. Show a shorter explanation, surface help, or stop showing things."],
-  ["purchase_intent", "Purchase intent", "0 = none, 1 = imminent. Switch a “Learn more” button to “Start trial”."],
-  ["abandon_risk", "Abandon risk", "Probability of leaving within ~30 s without acting. Gate an exit offer on it instead of on mouse position."],
-] as const;
-
 export function Flags() {
-  const state = useVisitorState();
-  const evaluated = state.meta.source !== "initial";
+  const s = useVisitorState();
+  const live = s.meta.source !== "initial";
   return (
-    <section id="flags" data-section="flags" className="border-t border-line">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <section id="flags" data-section="flags">
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:gap-20">
         <SectionHeader
-          eyebrow="Intent flags"
-          title="Flags for things you couldn’t measure before."
-          lede={
+          eyebrow="The flags"
+          title={
             <>
-              Every id below is a real flag you can pass to <code className="inline">useIntent()</code> or{" "}
-              <code className="inline">&lt;Intent when=…&gt;</code>. The right-hand column is your own live reading.
+              Flags for what you
+              <br />
+              <span className="serif-italic">couldn’t</span> measure.
             </>
           }
+          lede="Six judgments, every few seconds, each a normal 0–1 flag. The numbers on the right are you."
         />
-
-        <div className="mt-10 overflow-hidden rounded-[12px] border border-line bg-surface">
-          <Table title="visitor.intent" hint="choice · one wins, all carry a probability">
-            {(Object.keys(INTENTS) as IntentId[]).map((id) => (
-              <RowT key={id} id={id} label={INTENTS[id].label} desc={INTENTS[id].description} p={state.intent.probabilities[id]} win={evaluated && state.intent.value === id} />
+        <div className="card self-center p-6">
+          <ul className="space-y-3">
+            {(Object.keys(INTENTS) as IntentId[]).map((id) => {
+              const p = s.intent.probabilities[id];
+              const win = live && s.intent.value === id;
+              return (
+                <li key={id} className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1">
+                  <code className={`font-mono text-[12.5px] ${win ? "text-ink" : "text-ink-2"}`}>{id}</code>
+                  <Pct value={p} className={`text-[12px] ${win ? "text-ink" : "text-ink-3"}`} />
+                  <Meter value={p} className="col-span-2 h-1 bg-ink/10" />
+                </li>
+              );
+            })}
+          </ul>
+          <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-ink/10 pt-5 font-mono text-[12px]">
+            {(
+              [
+                ["expertise", s.expertise],
+                ["purchase_intent", s.purchaseIntent],
+                ["friction", s.friction],
+                ["abandon_risk", s.abandonRisk],
+              ] as const
+            ).map(([id, v]) => (
+              <div key={id} className="flex items-center justify-between gap-3">
+                <span className="text-ink-2">{id}</span>
+                <Pct value={v} className="text-ink" />
+              </div>
             ))}
-          </Table>
-          <Table title="visitor.nextAction" hint="choice · exposed as next:<id>">
-            {(Object.keys(NEXT_ACTIONS) as NextActionId[]).map((id) => (
-              <RowT key={id} id={`next:${id}`} label={NEXT_ACTIONS[id].label} desc={NEXT_ACTIONS[id].description} p={state.nextAction.probabilities[id]} win={evaluated && state.nextAction.value === id} />
-            ))}
-          </Table>
-          <Table title="scalars" hint="score / yes-no · 0..1">
-            {SCALARS.map(([id, label, desc]) => (
-              <RowT key={id} id={id} label={label} desc={desc} p={state.flags[id] ?? 0} />
-            ))}
-          </Table>
+          </div>
         </div>
-        <p className="mt-4 text-[13px] text-ink-3">
-          Need a flag that isn’t here? Add a question on the server — <a href="#docs-custom" className="text-signal hover:underline">custom questions</a> show up in the same map.
-        </p>
       </div>
     </section>
-  );
-}
-
-function Table({ title, hint, children }: { title: string; hint: string; children: React.ReactNode }) {
-  return (
-    <div className="border-b border-line last:border-b-0">
-      <div className="flex items-baseline justify-between bg-paper px-5 py-2.5">
-        <span className="font-mono text-[12.5px] text-ink">{title}</span>
-        <span className="font-mono text-[11px] text-ink-3">{hint}</span>
-      </div>
-      <ul>{children}</ul>
-    </div>
-  );
-}
-
-function RowT({ id, label, desc, p, win }: { id: string; label: string; desc: string; p: number; win?: boolean }) {
-  return (
-    <li className={`grid gap-3 border-t border-line px-5 py-3.5 sm:grid-cols-[210px_1fr_180px] sm:items-center ${win ? "bg-signal-soft/50" : ""}`}>
-      <div>
-        <code className="font-mono text-[13px] text-ink">{id}</code>
-        <div className="text-[12px] text-ink-3">{label}</div>
-      </div>
-      <p className="text-[13.5px] leading-snug text-ink-2">{desc}</p>
-      <div className="flex items-center gap-3">
-        <Meter value={p} className="flex-1" />
-        <Pct value={p} className={`w-10 text-right text-[12.5px] ${win ? "text-signal" : "text-ink-3"}`} />
-      </div>
-    </li>
   );
 }

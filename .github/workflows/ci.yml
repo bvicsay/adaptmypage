@@ -16,11 +16,11 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter intentflags typecheck
-      - run: pnpm --filter intentflags test
-      - run: pnpm --filter intentflags build
+      - run: pnpm --filter adaptmypage typecheck
+      - run: pnpm --filter adaptmypage test
+      - run: pnpm --filter adaptmypage build
       - run: pnpm --filter web exec next typegen
       - run: pnpm --filter web typecheck
       - run: pnpm --filter web build
         env:
-          NEXT_PUBLIC_SITE_URL: https://intentflags.dev
+          NEXT_PUBLIC_SITE_URL: https://adaptmypage.com

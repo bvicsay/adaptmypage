@@ -1,6 +1,6 @@
 "use client";
 
-import { IntentFlagsProvider } from "intentflags";
+import { IntentFlagsProvider } from "adaptmypage";
 import type { ReactNode } from "react";
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -12,8 +12,8 @@ export function Providers({ children }: { children: ReactNode }) {
       debounceMs={1800}
       minIntervalMs={3500}
       heartbeatMs={15000}
-      context={{ page: "landing", sdk_version: "0.1.0" }}
-      onError={(e) => console.warn("[intentflags]", e)}
+      context={{ page: "landing", sdk_version: "0.1.0", brand: "adaptmypage" }}
+      onError={(e) => console.warn("[adaptmypage]", e)}
     >
       {children}
     </IntentFlagsProvider>

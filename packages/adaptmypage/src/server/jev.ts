@@ -134,7 +134,7 @@ export function createJevEvaluator(opts: JevClientOptions = {}): Evaluator {
   const model = provider.model ?? DEFAULT_MODEL[provider.kind];
   const url = `${baseURL}/v1/systemone`;
   const extraHeaders: Record<string, string> =
-    provider.kind === "openrouter" ? { "http-referer": "https://intentflags.dev", "x-title": "IntentFlags" } : {};
+    provider.kind === "openrouter" ? { "http-referer": "https://adaptmypage.com", "x-title": "IntentFlags" } : {};
 
   return async (state, questions) => {
     const body = JSON.stringify({ model, state, questions });

@@ -44,8 +44,8 @@ describe("evaluateHeuristic", () => {
         actions: [
           { t: 0, type: "pageview", target: "/" },
           { t: 4, type: "section_enter", target: "docs" },
-          { t: 9, type: "hover", target: "code:npm install intentflags", detail: "3.1s" },
-          { t: 12, type: "copy", target: "code:npm install intentflags" },
+          { t: 9, type: "hover", target: "code:npm install adaptmypage", detail: "3.1s" },
+          { t: 12, type: "copy", target: "code:npm install adaptmypage" },
           { t: 30, type: "copy", target: "code:useIntent" },
         ],
       }),

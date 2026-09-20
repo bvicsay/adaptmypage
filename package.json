@@ -1,5 +1,5 @@
 {
-  "name": "intentflags-monorepo",
+  "name": "adaptmypage-monorepo",
   "private": true,
   "version": "0.0.0",
   "description": "IntentFlags — semantic feature flags for websites, powered by Jev",
@@ -8,11 +8,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "pnpm --filter intentflags build && pnpm --filter web dev",
-    "build": "pnpm -r --filter intentflags build && pnpm --filter web build",
-    "build:sdk": "pnpm --filter intentflags build",
+    "dev": "pnpm --filter adaptmypage build && pnpm --filter web dev",
+    "build": "pnpm -r --filter adaptmypage build && pnpm --filter web build",
+    "build:sdk": "pnpm --filter adaptmypage build",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "release:sdk": "pnpm --filter intentflags publish --access public"
+    "release:sdk": "pnpm --filter adaptmypage publish --access public"
   }
 }

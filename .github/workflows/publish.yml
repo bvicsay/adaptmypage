@@ -2,7 +2,7 @@ name: Publish SDK
 
 on:
   push:
-    tags: ["intentflags@*"]
+    tags: ["adaptmypage@*"]
 
 jobs:
   publish:
@@ -19,6 +19,6 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter intentflags publish --access public --no-git-checks
+      - run: pnpm --filter adaptmypage publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

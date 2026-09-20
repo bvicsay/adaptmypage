@@ -1,8 +1,8 @@
 "use client";
 
-import { useVisitorState } from "intentflags";
+import { useVisitorState } from "adaptmypage";
 import { useState } from "react";
-import { Button, SectionHeader } from "../ui";
+import { SectionHeader } from "../ui";
 
 export function Subscribe() {
   const state = useVisitorState();
@@ -23,7 +23,7 @@ export function Subscribe() {
       const json = await res.json();
       if (!res.ok || !json.ok) throw new Error(json.error ?? "Could not subscribe.");
       setStatus("done");
-      setMessage("You’re on the list. One email when the hosted API opens.");
+      setMessage("You’re on the list.");
     } catch (err) {
       setStatus("error");
       setMessage((err as Error).message);
@@ -31,18 +31,21 @@ export function Subscribe() {
   }
 
   return (
-    <section id="subscribe" data-section="subscribe" className="border-t border-line">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center">
+    <section id="subscribe" data-section="subscribe" className="band">
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:items-center lg:gap-20">
         <SectionHeader
           eyebrow="Early access"
-          title="Get the launch email."
-          lede="One message when the hosted API and dashboard open, with pricing. No sequence, no digest. The SDK is on npm today."
+          title={
+            <>
+              Get the launch
+              <br />
+              <span className="serif-italic">email.</span>
+            </>
+          }
+          lede="One message when the hosted API opens. Nothing else."
         />
         <form onSubmit={submit} name="early-access" data-intent="early-access" className="w-full max-w-md lg:ml-auto">
-          <label htmlFor="email" className="eyebrow">
-            Email
-          </label>
-          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               id="email"
               name="email"
@@ -51,17 +54,23 @@ export function Subscribe() {
               autoComplete="email"
               inputMode="email"
               placeholder="you@company.com"
+              aria-label="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "done"}
-              className="h-11 flex-1 rounded-[8px] border border-line-2 bg-surface px-3.5 text-[16px] text-ink placeholder:text-ink-3 focus:border-signal disabled:opacity-60"
+              className="h-12 flex-1 rounded-[6px] border border-ink/25 bg-surface px-4 text-[16px] text-ink placeholder:text-ink-3 focus:border-ink disabled:opacity-60"
             />
-            <Button type="submit" disabled={status === "sending" || status === "done"} dataIntent="Subscribe: Get updates">
+            <button
+              type="submit"
+              disabled={status === "sending" || status === "done"}
+              data-intent="Subscribe: Get updates"
+              className="h-12 rounded-[6px] bg-ink px-5 text-[0.95rem] font-semibold text-paper hover:bg-black disabled:opacity-60"
+            >
               {status === "sending" ? "Adding…" : status === "done" ? "Added" : "Get updates"}
-            </Button>
+            </button>
           </div>
-          <p className={`mt-2 min-h-[1.25rem] text-[13px] ${status === "error" ? "text-live" : "text-ink-3"}`} role="status">
-            {message || "Unsubscribe with one click. Address is used for this one email only."}
+          <p className={`mt-3 min-h-[1.25rem] font-mono text-[11.5px] ${status === "error" ? "text-red-700" : "text-ink-3"}`} role="status">
+            {message}
           </p>
         </form>
       </div>

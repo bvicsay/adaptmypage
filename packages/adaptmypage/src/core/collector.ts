@@ -356,10 +356,11 @@ export class Collector {
 
   private onClick = (ev: MouseEvent) => {
     this.touch();
-    const el = (ev.target as Element | null)?.closest?.(INTERACTIVE) ?? (ev.target as Element | null);
-    if (!el) return;
-    const target = labelOf(el);
-    const section = this.sectionOf(el);
+    const raw = ev.target as Element | null;
+    const el = raw?.closest?.(INTERACTIVE) ?? null;
+    const section = this.sectionOf(raw);
+    // clicks on plain content are recorded by area only; their text is not a decision
+    const target = el ? labelOf(el) : `area:${section ?? "page"}`;
     const now = Date.now();
     this.clicks.push({ t: now, target });
     this.clicks = this.clicks.filter((c) => now - c.t < 700);

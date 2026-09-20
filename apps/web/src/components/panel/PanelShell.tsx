@@ -1,6 +1,6 @@
 "use client";
 
-import { useVisitorState } from "intentflags";
+import { useVisitorState } from "adaptmypage";
 import type { ReactNode } from "react";
 import { useAdaptive } from "../adaptive/adaptive-context";
 import { IntentPanel } from "./IntentPanel";
@@ -48,13 +48,13 @@ export function PanelShell({ children }: { children: ReactNode }) {
           type="button"
           onClick={() => panel.setOpen(true)}
           data-intent="Open live panel"
-          className="fixed bottom-4 right-4 z-40 flex items-center gap-2.5 rounded-full border border-line-2 bg-surface px-3.5 py-2 shadow-panel hover:border-ink-3"
+          className="fixed bottom-4 right-4 z-40 flex items-center gap-2.5 rounded-full border border-ink/25 bg-surface px-3.5 py-2 shadow-panel hover:border-ink"
         >
-          <span className="live-dot" aria-hidden />
+          <span className="dot is-live" aria-hidden />
           <span className="font-mono text-[12px] text-ink">
             {evaluated ? (
               <>
-                {state.intent.value} <span className="text-signal">{Math.round(state.intent.confidence * 100)}%</span>
+                {state.intent.value} <span className="text-ink-3">{Math.round(state.intent.confidence * 100)}%</span>
               </>
             ) : (
               "live visitor state"
