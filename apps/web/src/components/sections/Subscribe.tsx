@@ -1,11 +1,9 @@
 "use client";
 
-import { useVisitorState } from "adaptmypage";
 import { useState } from "react";
 import { SectionHeader } from "../ui";
 
 export function Subscribe() {
-  const state = useVisitorState();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -18,7 +16,7 @@ export function Subscribe() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, source: "landing", intent: state.intent.value }),
+        body: JSON.stringify({ email, source: "landing" }),
       });
       const json = await res.json();
       if (!res.ok || !json.ok) throw new Error(json.error ?? "Could not subscribe.");
@@ -31,7 +29,7 @@ export function Subscribe() {
   }
 
   return (
-    <section id="subscribe" data-section="subscribe" className="band">
+    <section id="subscribe">
       <div className="mx-auto grid max-w-6xl gap-14 px-6 py-28 sm:px-10 lg:grid-cols-2 lg:items-center lg:gap-20">
         <SectionHeader
           eyebrow="Early access"

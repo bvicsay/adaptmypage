@@ -20,7 +20,20 @@ This repository holds the open-source SDK and the landing page that runs it on i
 | path | what |
 | --- | --- |
 | [`packages/adaptmypage`](packages/adaptmypage) | The npm package: React hooks, `<Intent>`, vanilla core, server handler, Jev client, heuristic fallback, tests |
-| [`apps/web`](apps/web) | The landing page (Next.js 16). Docs, pricing, email list, and a live side panel showing the visitor their own inferred state |
+| [`apps/web`](apps/web) | The landing page and the live demos (Next.js 16). `/demo/<id>` shows the same page for two visitors side by side with a change log; `/demo/<id>/frame` is the page itself |
+
+## Demos
+
+Four real pages, each with its own route and custom Jev questions, in [`apps/web/src/demos`](apps/web/src/demos):
+
+| demo | brand | what changes |
+| --- | --- | --- |
+| `pricing` | Relay | Comparison table for comparers, trial button for buyers, SSO/SOC 2 block for procurement, "recommended" badge from `team_size` |
+| `product` | Ando | The one reassurance the shopper needs from `concern` (fit, shipping, price, durability), specs up front for runners, sticky buy bar |
+| `docs` | Vex OCR | Right language tab from `integration_target`, guided vs reference depth from expertise, one comparison card from `deciding_factor` |
+| `signup` | Ledgerly | Shorter form on friction, blocker-specific reassurance from `blocker`, CLI for developers, finish-later link on abandon risk |
+
+Each demo is a folder with `config.ts` (site context, questions, scripted personas, code shown in the hub) and `Page.tsx` (the page, using the SDK hooks). Scripted personas replay through the real API, so every change on screen is a real judgment.
 
 ## How it works
 
