@@ -109,7 +109,7 @@ function Pane({ demo, frame, initial }: { demo: DemoConfig; frame: string; initi
           key={src}
           src={src}
           title={`${demo.brand} — visitor ${frame}`}
-          className="h-[600px] w-full rounded-[6px] bg-white"
+          className="h-[520px] w-full rounded-[6px] bg-white sm:h-[600px]"
           loading="eager"
         />
       </div>

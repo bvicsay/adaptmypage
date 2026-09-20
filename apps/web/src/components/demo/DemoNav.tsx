@@ -6,9 +6,9 @@ import type { DemoId } from "@/demos/types";
 export function DemoNav({ active }: { active: DemoId }) {
   return (
     <div className="sticky top-0 z-20 border-b border-ink/10 bg-paper/85 backdrop-blur supports-[backdrop-filter]:bg-paper/70">
-      <nav className="mx-auto flex h-[64px] max-w-[1400px] items-center justify-between gap-6 px-5 sm:px-8" aria-label="Demos">
-        <Link href="/" data-intent="Logo"><Wordmark /></Link>
-        <ul className="thin-scroll flex gap-1 overflow-x-auto">
+      <nav className="mx-auto flex h-[64px] max-w-[1400px] items-center gap-3 px-5 sm:gap-6 sm:px-8" aria-label="Demos">
+        <Link href="/" data-intent="Logo" className="shrink-0"><Wordmark className="[&>span:last-child]:hidden sm:[&>span:last-child]:inline" /></Link>
+        <ul className="thin-scroll flex min-w-0 flex-1 gap-1 overflow-x-auto sm:justify-center">
           {DEMO_IDS.map((id) => (
             <li key={id}>
               <Link
@@ -21,7 +21,7 @@ export function DemoNav({ active }: { active: DemoId }) {
             </li>
           ))}
         </ul>
-        <a href="https://github.com/bvicsay/adaptmypage" className="hidden text-[13.5px] font-medium text-ink-2 hover:text-ink sm:inline" data-intent="Nav: GitHub">GitHub</a>
+        <a href="https://github.com/bvicsay/adaptmypage" className="hidden shrink-0 text-[13.5px] font-medium text-ink-2 hover:text-ink sm:inline" data-intent="Nav: GitHub">GitHub</a>
       </nav>
     </div>
   );
