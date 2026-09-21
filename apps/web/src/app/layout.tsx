@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "adaptmypage — a page that adapts to the person reading it", template: "%s · adaptmypage" },
   description:
-    "Semantic feature flags for websites. Your React code reads what a visitor is trying to do, as a normal flag, and changes the page live."
+    "Semantic feature flags for websites. Your React code reads what a visitor is trying to do, as a normal flag, and changes the page live.",
   keywords: ["feature flags", "intent", "personalization", "React", "Next.js", "adaptive UI"],
   openGraph: {
     type: "website",
