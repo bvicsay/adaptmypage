@@ -86,7 +86,7 @@ export function DemoShell({ demo, children }: { demo: DemoConfig; children: Reac
   );
 }
 
-/** A subtitle strip at the bottom of the frame: what the visitor just did, and what Jev currently reads. */
+/** A subtitle strip at the bottom of the frame: what the visitor just did, and what the page currently reads. */
 function Narration({ persona }: { persona: string | null }) {
   const actions = useIntentActions(3);
   const state = useVisitorState();
@@ -104,10 +104,10 @@ function Narration({ persona }: { persona: string | null }) {
         <span className="hidden shrink-0 sm:inline">
           {evaluated ? (
             <>
-              Jev: {state.intent.value} <span className="text-[#d4f23f]">{Math.round(state.intent.confidence * 100)}%</span>
+              reading: {state.intent.value} <span className="text-[#d4f23f]">{Math.round(state.intent.confidence * 100)}%</span>
             </>
           ) : (
-            "Jev: waiting for behavior"
+            "reading: waiting for behavior"
           )}
         </span>
       </div>
@@ -131,7 +131,7 @@ function StandaloneToasts() {
       <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-black/50">The page just changed</p>
       <p className="mt-1 text-[14px] font-semibold">{visible.what}</p>
       <p className="mt-1 font-mono text-[11px] text-black/60">
-        Jev read {visible.flag} {Math.round(visible.confidence * 100)}%{visible.evidence.length ? ` · because the visitor ${visible.evidence[0]}` : ""}
+        Detected {visible.flag} {Math.round(visible.confidence * 100)}%{visible.evidence.length ? ` · because the visitor ${visible.evidence[0]}` : ""}
       </p>
     </div>
   );

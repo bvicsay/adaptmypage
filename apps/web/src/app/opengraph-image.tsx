@@ -18,7 +18,7 @@ export default async function Image() {
             <span>This page is</span>
             <span style={{ fontStyle: "italic", fontFamily: "serif", fontWeight: 400, letterSpacing: -2 }}>adapting to you.</span>
           </div>
-          <div style={{ fontSize: 28, color: "#4a4f49", maxWidth: 820, lineHeight: 1.35 }}>Semantic feature flags for websites, powered by Jev. Open source.</div>
+          <div style={{ fontSize: 28, color: "#4a4f49", maxWidth: 820, lineHeight: 1.35 }}>Semantic feature flags for websites. Change your page live to match what each visitor wants.</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 30, fontWeight: 700, letterSpacing: -1.5 }}>

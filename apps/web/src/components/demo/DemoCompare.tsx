@@ -22,9 +22,9 @@ export function DemoCompare({ demo, routeHtml, clientHtml }: { demo: DemoConfig;
       <section className="mt-20 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="eyebrow flex items-center gap-2"><span className="dot" aria-hidden />How it’s wired</p>
-          <h2 className="display mt-4 text-[2rem] sm:text-[2.6rem]">Two files.<br /><span className="serif-italic">Real</span> judgments.</h2>
+          <h2 className="display mt-4 text-[2rem] sm:text-[2.6rem]">Two files.<br /><span className="serif-italic">Live</span> decisions.</h2>
           <p className="mt-4 max-w-md text-[0.98rem] leading-relaxed text-ink-2">
-            The route declares what this site cares about as typed questions. Jev answers them from the visitor’s behavior every few seconds. The page reads the answers as flags. Every change you saw above came from a line like the ones on the right.
+            The route declares what this site cares about as typed questions. adaptmypage answers them from the visitor’s behavior every few seconds. The page reads the answers as flags. Every change you saw above came from a line like the ones on the right.
           </p>
           <a href={`/demo/${demo.id}/frame`} target="_blank" rel="noreferrer" className="link-arrow mt-6" data-intent="Open the page full-screen">Open this page full-screen and be the visitor</a>
         </div>
@@ -93,10 +93,10 @@ function Pane({ demo, frame, initial }: { demo: DemoConfig; frame: string; initi
         <div className="font-mono text-[11.5px] text-ink-2">
           {evaluated ? (
             <>
-              Jev: <span className="text-ink">{state!.intent.value}</span> {Math.round(state!.intent.confidence * 100)}%
+              Reading: <span className="text-ink">{state!.intent.value}</span> {Math.round(state!.intent.confidence * 100)}%
             </>
           ) : (
-            <span className="text-ink-3">Jev: waiting for behavior…</span>
+            <span className="text-ink-3">Reading: waiting for behavior…</span>
           )}
         </div>
       </header>
@@ -132,7 +132,7 @@ function Pane({ demo, frame, initial }: { demo: DemoConfig; frame: string; initi
             {c.detail ? <p className="mt-1 text-[12.5px] text-ink-2">{c.detail}</p> : null}
             <div className="mt-2.5 rounded-[6px] bg-card px-3 py-2">
               <div className="flex items-baseline justify-between font-mono text-[11px]">
-                <span className="text-ink-2">Jev read <span className="text-ink">{c.flag}</span></span>
+                <span className="text-ink-2">Detected <span className="text-ink">{c.flag}</span></span>
                 <span className="text-ink">{Math.round(c.confidence * 100)}%</span>
               </div>
               <div className="meter mt-1 h-1 rounded-full bg-ink/10"><i style={{ width: `${Math.round(c.confidence * 100)}%`, backgroundColor: "var(--ink)" }} /></div>

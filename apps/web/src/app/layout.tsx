@@ -13,17 +13,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "adaptmypage — a page that adapts to the person reading it", template: "%s · adaptmypage" },
   description:
-    "Semantic feature flags for websites, powered by Jev. Your React code reads what a visitor is trying to do, as a normal flag. Open source.",
-  keywords: ["feature flags", "intent", "personalization", "React", "Next.js", "Jev", "TypeSafe", "adaptive UI"],
+    "Semantic feature flags for websites. Your React code reads what a visitor is trying to do, as a normal flag, and changes the page live."
+  keywords: ["feature flags", "intent", "personalization", "React", "Next.js", "adaptive UI"],
   openGraph: {
     type: "website",
     url: siteUrl,
     siteName: "adaptmypage",
     title: "adaptmypage — a page that adapts to the person reading it",
-    description: "Semantic feature flags for websites, powered by Jev.",
+    description: "Semantic feature flags for websites. Change your page live to match what each visitor wants.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "adaptmypage" }],
   },
-  twitter: { card: "summary_large_image", title: "adaptmypage", description: "A page that adapts to the person reading it. Powered by Jev." },
+  twitter: { card: "summary_large_image", title: "adaptmypage", description: "A page that adapts to the person reading it." },
   icons: { icon: "/icon.svg" },
 };
 

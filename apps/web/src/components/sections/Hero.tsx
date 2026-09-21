@@ -6,12 +6,12 @@ export function Hero({ installHtml }: { installHtml: string }) {
     <section id="hero">
       <div className="mx-auto grid max-w-6xl gap-14 px-6 pb-24 pt-20 sm:px-10 sm:pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20">
         <div>
-          <p className="eyebrow flex items-center gap-2"><span className="dot" aria-hidden />Semantic feature flags · powered by Jev</p>
+          <p className="eyebrow flex items-center gap-2"><span className="dot" aria-hidden />Semantic feature flags for websites</p>
           <h1 className="display mt-8 text-[3rem] sm:text-[4.2rem] lg:text-[4.8rem] text-ink">
             Change your website live to match what each visitor <span className="serif-italic">wants</span>.
           </h1>
           <p className="mt-8 max-w-md text-[1.1rem] leading-relaxed text-ink-2">
-            Jev reads what a visitor is trying to do. Your React code reads it back as a flag and changes the page. Open source.
+            adaptmypage reads what a visitor is trying to do. Your React code reads it back as a flag and changes the page. Open source.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
             <Link href="/demo/pricing" className="link-arrow" data-intent="Hero: See the demos">See four pages change live</Link>
